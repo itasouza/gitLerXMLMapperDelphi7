@@ -1,0 +1,180 @@
+<XmlTransformation Version="1.0"><Transform Direction="ToCds" DataEncoding="UTF-8"><SelectEach dest="DATAPACKET\ROWDATA\ROW" from="\revista\processo"><Select dest="@numero1" from="@numero"/><Select dest="@data-deposito" from="@data-deposito"/><Select dest="@data-concessao" from="@data-concessao"/><Select dest="@data-vigencia" from="@data-vigencia"/><Select dest="@despacho_codigo" from="\despachos\despacho@codigo"/><Select dest="@despacho_nome" from="\despachos\despacho@nome"/><Select dest="@texto-complementar" from="\despachos\despacho\texto-complementar"/><Select dest="@numero2" from="\despachos\despacho\protocolo@numero"/><Select dest="@data1" from="\despachos\despacho\protocolo@data"/><Select dest="@codigoServico" from="\despachos\despacho\protocolo@codigoServico"/><Select dest="@requerente_nome-razao-social" from="\despachos\despacho\protocolo\requerente@nome-razao-social"/><Select dest="@pais" from="\despachos\despacho\protocolo\requerente@pais"/><Select dest="@uf1" from="\despachos\despacho\protocolo\requerente@uf"/><Select dest="@procurador1" from="\despachos\despacho\protocolo\procurador"/><Select dest="@cessionario_nome-razao-social" from="\despachos\despacho\protocolo\cessionario@nome-razao-social"/><Select dest="@nome-razao-social" from="\titulares\titular@nome-razao-social"/><Select dest="@titular_pais" from="\titulares\titular@pais"/><Select dest="@uf2" from="\titulares\titular@uf"/><Select dest="@classe-nice_codigo" from="\classe-nice@codigo"/><Select dest="@classe-nice_especificacao" from="\classe-nice\especificacao"/><Select dest="@apostila" from="\apostila"/><Select dest="@procurador2" from="\procurador"/><Select dest="@apresentacao" from="\marca@apresentacao"/><Select dest="@natureza" from="\marca@natureza"/><Select dest="@marca_nome" from="\marca\nome"/><Select dest="@processo" from="\sobrestadores\sobrestador@processo"/><Select dest="@marca" from="\sobrestadores\sobrestador@marca"/><Select dest="@edicao" from="\classes-vienna@edicao"/><Select dest="@classe-vienna_codigo" from="\classes-vienna\classe-vienna@codigo"/><Select dest="@data2" from="\prioridade-unionista\prioridade@data"/><Select dest="@numero3" from="\prioridade-unionista\prioridade@numero"/><Select dest="@prioridade_pais" from="\prioridade-unionista\prioridade@pais"/><Select dest="@classe-nacional_codigo" from="\classe-nacional@codigo"/><Select dest="@classe-nacional_especificacao" from="\classe-nacional\especificacao"/><Select dest="@codigo" from="\classe-nacional\sub-classes-nacional\sub-classe-nacional@codigo"/></SelectEach></Transform><XmlSchema RootName="revista"><![CDATA[<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="revista" type="revistaType"/>
+  <xs:complexType name="revistaType">
+    <xs:sequence>
+      <xs:element name="processo" type="processoType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="numero" type="xs:string"/>
+    <xs:attribute name="data" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="processo" type="processoType"/>
+  <xs:complexType name="processoType">
+    <xs:sequence>
+      <xs:element name="despachos" type="despachosType"/>
+      <xs:element name="titulares" type="titularesType"/>
+      <xs:element name="classe-nice" type="classe-niceType"/>
+      <xs:element name="apostila" type="apostilaType"/>
+      <xs:element name="procurador" type="procuradorType"/>
+      <xs:element name="marca" type="marcaType"/>
+      <xs:element name="sobrestadores" type="sobrestadoresType"/>
+      <xs:element name="classes-vienna" type="classes-viennaType"/>
+      <xs:element name="prioridade-unionista" type="prioridade-unionistaType"/>
+      <xs:element name="classe-nacional" type="classe-nacionalType"/>
+    </xs:sequence>
+    <xs:attribute name="numero" type="xs:string"/>
+    <xs:attribute name="data-deposito" type="xs:string"/>
+    <xs:attribute name="data-concessao" type="xs:string"/>
+    <xs:attribute name="data-vigencia" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="despachos" type="despachosType"/>
+  <xs:complexType name="despachosType">
+    <xs:sequence>
+      <xs:element name="despacho" type="despachoType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="despacho" type="despachoType"/>
+  <xs:complexType name="despachoType">
+    <xs:sequence>
+      <xs:element name="texto-complementar" type="texto-complementarType"/>
+      <xs:element name="protocolo" type="protocoloType"/>
+    </xs:sequence>
+    <xs:attribute name="codigo" type="xs:string"/>
+    <xs:attribute name="nome" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="titulares" type="titularesType"/>
+  <xs:complexType name="titularesType">
+    <xs:sequence>
+      <xs:element name="titular" type="titularType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="titular" type="titularType"/>
+  <xs:complexType name="titularType">
+    <xs:sequence/>
+    <xs:attribute name="nome-razao-social" type="xs:string"/>
+    <xs:attribute name="pais" type="xs:string"/>
+    <xs:attribute name="uf" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="classe-nice" type="classe-niceType"/>
+  <xs:complexType name="classe-niceType">
+    <xs:sequence>
+      <xs:element name="especificacao" type="especificacaoType"/>
+    </xs:sequence>
+    <xs:attribute name="codigo" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="especificacao" type="especificacaoType"/>
+  <xs:simpleType name="especificacaoType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:element name="apostila" type="apostilaType"/>
+  <xs:simpleType name="apostilaType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:element name="procurador" type="procuradorType"/>
+  <xs:simpleType name="procuradorType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:element name="marca" type="marcaType"/>
+  <xs:complexType name="marcaType">
+    <xs:sequence>
+      <xs:element name="nome" type="nomeType"/>
+    </xs:sequence>
+    <xs:attribute name="apresentacao" type="xs:string"/>
+    <xs:attribute name="natureza" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="nome" type="nomeType"/>
+  <xs:simpleType name="nomeType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:element name="texto-complementar" type="texto-complementarType"/>
+  <xs:simpleType name="texto-complementarType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:element name="sobrestadores" type="sobrestadoresType"/>
+  <xs:complexType name="sobrestadoresType">
+    <xs:sequence>
+      <xs:element name="sobrestador" type="sobrestadorType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="sobrestador" type="sobrestadorType"/>
+  <xs:complexType name="sobrestadorType">
+    <xs:sequence/>
+    <xs:attribute name="processo" type="xs:string"/>
+    <xs:attribute name="marca" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="classes-vienna" type="classes-viennaType"/>
+  <xs:complexType name="classes-viennaType">
+    <xs:sequence>
+      <xs:element name="classe-vienna" type="classe-viennaType"/>
+    </xs:sequence>
+    <xs:attribute name="edicao" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="classe-vienna" type="classe-viennaType"/>
+  <xs:complexType name="classe-viennaType">
+    <xs:sequence/>
+    <xs:attribute name="codigo" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="prioridade-unionista" type="prioridade-unionistaType"/>
+  <xs:complexType name="prioridade-unionistaType">
+    <xs:sequence>
+      <xs:element name="prioridade" type="prioridadeType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="prioridade" type="prioridadeType"/>
+  <xs:complexType name="prioridadeType">
+    <xs:sequence/>
+    <xs:attribute name="data" type="xs:string"/>
+    <xs:attribute name="numero" type="xs:string"/>
+    <xs:attribute name="pais" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="classe-nacional" type="classe-nacionalType"/>
+  <xs:complexType name="classe-nacionalType">
+    <xs:sequence>
+      <xs:element name="especificacao" type="especificacaoType"/>
+      <xs:element name="sub-classes-nacional" type="sub-classes-nacionalType"/>
+    </xs:sequence>
+    <xs:attribute name="codigo" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="especificacao" type="especificacaoType"/>
+  <xs:simpleType name="especificacaoType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:element name="sub-classes-nacional" type="sub-classes-nacionalType"/>
+  <xs:complexType name="sub-classes-nacionalType">
+    <xs:sequence>
+      <xs:element name="sub-classe-nacional" type="sub-classe-nacionalType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="sub-classe-nacional" type="sub-classe-nacionalType"/>
+  <xs:complexType name="sub-classe-nacionalType">
+    <xs:sequence/>
+    <xs:attribute name="codigo" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="protocolo" type="protocoloType"/>
+  <xs:complexType name="protocoloType">
+    <xs:sequence>
+      <xs:element name="requerente" type="requerenteType"/>
+      <xs:element name="procurador" type="procuradorType"/>
+      <xs:element name="cessionario" type="cessionarioType"/>
+    </xs:sequence>
+    <xs:attribute name="numero" type="xs:string"/>
+    <xs:attribute name="data" type="xs:string"/>
+    <xs:attribute name="codigoServico" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="requerente" type="requerenteType"/>
+  <xs:complexType name="requerenteType">
+    <xs:sequence/>
+    <xs:attribute name="nome-razao-social" type="xs:string"/>
+    <xs:attribute name="pais" type="xs:string"/>
+    <xs:attribute name="uf" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="procurador" type="procuradorType"/>
+  <xs:simpleType name="procuradorType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:element name="cessionario" type="cessionarioType"/>
+  <xs:complexType name="cessionarioType">
+    <xs:sequence/>
+    <xs:attribute name="nome-razao-social" type="xs:string"/>
+  </xs:complexType>
+</xs:schema>]]></XmlSchema><CdsSkeleton/><XslTransform/><Skeleton><![CDATA[<?xml version="1.0"?><DATAPACKET Version="2.0"><METADATA><FIELDS><FIELD attrname="numero1" fieldtype="string" WIDTH="10"/><FIELD attrname="data-deposito" fieldtype="string" WIDTH="10"/><FIELD attrname="data-concessao" fieldtype="string" WIDTH="10"/><FIELD attrname="data-vigencia" fieldtype="string" WIDTH="10"/><FIELD attrname="despacho_codigo" fieldtype="string" WIDTH="7"/><FIELD attrname="despacho_nome" fieldtype="string" WIDTH="94"/><FIELD attrname="texto-complementar" fieldtype="string" WIDTH="1432"/><FIELD attrname="numero2" fieldtype="string" WIDTH="4"/><FIELD attrname="data1" fieldtype="string" WIDTH="10"/><FIELD attrname="codigoServico" fieldtype="string" WIDTH="5"/><FIELD attrname="requerente_nome-razao-social" fieldtype="string" WIDTH="130"/><FIELD attrname="pais" fieldtype="string" WIDTH="2"/><FIELD attrname="uf1" fieldtype="string" WIDTH="2"/><FIELD attrname="procurador1" fieldtype="string" WIDTH="80"/><FIELD attrname="cessionario_nome-razao-social" fieldtype="string" WIDTH="130"/><FIELD attrname="nome-razao-social" fieldtype="string" WIDTH="130"/><FIELD attrname="titular_pais" fieldtype="string" WIDTH="2"/><FIELD attrname="uf2" fieldtype="string" WIDTH="2"/><FIELD attrname="classe-nice_codigo" fieldtype="string" WIDTH="7"/><FIELD attrname="classe-nice_especificacao" fieldtype="bin.hex" SUBTYPE="Text"/><FIELD attrname="apostila" fieldtype="string" WIDTH="169"/><FIELD attrname="procurador2" fieldtype="string" WIDTH="80"/><FIELD attrname="apresentacao" fieldtype="string" WIDTH="14"/><FIELD attrname="natureza" fieldtype="string" WIDTH="10"/><FIELD attrname="marca_nome" fieldtype="string" WIDTH="137"/><FIELD attrname="processo" fieldtype="string" WIDTH="9"/><FIELD attrname="marca" fieldtype="string" WIDTH="67"/><FIELD attrname="edicao" fieldtype="string" WIDTH="1"/><FIELD attrname="classe-vienna_codigo" fieldtype="string" WIDTH="7"/><FIELD attrname="data2" fieldtype="string" WIDTH="10"/><FIELD attrname="numero3" fieldtype="string" WIDTH="4"/><FIELD attrname="prioridade_pais" fieldtype="string" WIDTH="2"/><FIELD attrname="classe-nacional_codigo" fieldtype="string" WIDTH="7"/><FIELD attrname="classe-nacional_especificacao" fieldtype="bin.hex" SUBTYPE="Text"/><FIELD attrname="codigo" fieldtype="string" WIDTH="7"/></FIELDS><PARAMS/></METADATA><ROWDATA/><METADATA><FIELDS><FIELD attrname="numero1" fieldtype="string" WIDTH="4"/><FIELD attrname="data-deposito" fieldtype="string" WIDTH="10"/><FIELD attrname="data-concessao" fieldtype="string" WIDTH="10"/><FIELD attrname="data-vigencia" fieldtype="string" WIDTH="10"/><FIELD attrname="despacho_codigo" fieldtype="string" WIDTH="7"/><FIELD attrname="despacho_nome" fieldtype="string" WIDTH="94"/><FIELD attrname="texto-complementar" fieldtype="string" WIDTH="1432"/><FIELD attrname="numero2" fieldtype="string" WIDTH="4"/><FIELD attrname="data1" fieldtype="string" WIDTH="10"/><FIELD attrname="codigoServico" fieldtype="string" WIDTH="5"/><FIELD attrname="requerente_nome-razao-social" fieldtype="string" WIDTH="130"/><FIELD attrname="pais" fieldtype="string" WIDTH="2"/><FIELD attrname="uf1" fieldtype="string" WIDTH="2"/><FIELD attrname="procurador1" fieldtype="string" WIDTH="80"/><FIELD attrname="cessionario_nome-razao-social" fieldtype="string" WIDTH="130"/><FIELD attrname="nome-razao-social" fieldtype="string" WIDTH="130"/><FIELD attrname="titular_pais" fieldtype="string" WIDTH="2"/><FIELD attrname="uf2" fieldtype="string" WIDTH="2"/><FIELD attrname="classe-nice_codigo" fieldtype="string" WIDTH="7"/><FIELD attrname="classe-nice_especificacao" fieldtype="bin.hex" SUBTYPE="Text"/><FIELD attrname="apostila" fieldtype="string" WIDTH="169"/><FIELD attrname="procurador2" fieldtype="string" WIDTH="80"/><FIELD attrname="apresentacao" fieldtype="string" WIDTH="14"/><FIELD attrname="natureza" fieldtype="string" WIDTH="10"/><FIELD attrname="marca_nome" fieldtype="string" WIDTH="137"/><FIELD attrname="processo" fieldtype="string" WIDTH="9"/><FIELD attrname="marca" fieldtype="string" WIDTH="67"/><FIELD attrname="edicao" fieldtype="string" WIDTH="1"/><FIELD attrname="classe-vienna_codigo" fieldtype="string" WIDTH="7"/><FIELD attrname="data2" fieldtype="string" WIDTH="10"/><FIELD attrname="numero3" fieldtype="string" WIDTH="4"/><FIELD attrname="prioridade_pais" fieldtype="string" WIDTH="2"/><FIELD attrname="classe-nacional_codigo" fieldtype="string" WIDTH="7"/><FIELD attrname="classe-nacional_especificacao" fieldtype="bin.hex" SUBTYPE="Text"/><FIELD attrname="codigo" fieldtype="string" WIDTH="7"/></FIELDS><PARAMS/></METADATA><ROWDATA/></DATAPACKET>
+]]></Skeleton></XmlTransformation>
